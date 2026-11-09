@@ -1,0 +1,30 @@
+name: StatusHub CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Vérification du dépôt
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Vérifier les fichiers essentiels
+        run: |
+          test -f README.md
+          test -f .gitignore
+          test -f LICENSE
+
+      - name: Afficher le résultat
+        run: echo "StatusHub repository checks passed!"
